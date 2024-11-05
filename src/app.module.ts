@@ -11,6 +11,7 @@ import { PostsModule } from './posts/posts.module';
 import config from './common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
@@ -31,9 +32,10 @@ import { GqlConfigService } from './gql-config.service';
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       useClass: GqlConfigService,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
 
-    AuthModule,
+    // AuthModule,
     UsersModule,
     PostsModule,
   ],
